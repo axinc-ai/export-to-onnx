@@ -65,7 +65,7 @@ Exporting from Tensorflow to ONNX
         onnx_graph = tf2onnx.tfonnx.process_tf_graph(graph1, input_names=["import/block1_conv1/kernel:0"], output_names=["import/vgg16/predictions/Softmax:0"],opset=10)
         model_proto = onnx_graph.make_model("vgg16")
         with open("vgg16.onnx", "wb") as f:
-            f.write(model_proto.SerializeToString())```
+            f.write(model_proto.SerializeToString())
 
 Creation of the prototxt file
 
