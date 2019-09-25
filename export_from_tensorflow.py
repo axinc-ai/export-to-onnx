@@ -28,11 +28,14 @@ sess.run(tf.variables_initializer(uninitialized_variables))
 frozen_graph_def = tf.graph_util.convert_variables_to_constants(sess,sess.graph.as_graph_def(),["vgg16/predictions/Softmax"])
 
 import tf2onnx
+from tf2onnx.optimizer.transpose_optimizer import TransposeOptimizer
 
 graph1 = tf.Graph()
 with graph1.as_default():
     tf.import_graph_def(frozen_graph_def)
     onnx_graph = tf2onnx.tfonnx.process_tf_graph(graph1, input_names=["import/block1_conv1/kernel:0"], output_names=["import/vgg16/predictions/Softmax:0"],opset=10)
+    optimizer = TransposeOptimizer()
+    opt_model_proto = optimizer.optimize(onnx_graph)
     model_proto = onnx_graph.make_model("vgg16_tensorflow")
     with open("vgg16_tensorflow.onnx", "wb") as f:
         f.write(model_proto.SerializeToString())
