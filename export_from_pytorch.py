@@ -8,4 +8,4 @@ from torchvision import datasets, models, transforms
 vgg16 = models.vgg16(pretrained=True)
 
 x = Variable(torch.randn(1, 3, 224, 224))
-torch.onnx.export(vgg16, x, 'vgg16_pytorch.onnx', verbose=True)
+torch.onnx.export(vgg16, x, 'vgg16_pytorch.onnx', verbose=True, opset_version=10)
