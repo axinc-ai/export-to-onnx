@@ -11,6 +11,11 @@ Creation of the "prototxt" file
 
     python3 onnx2prototxt.py vgg16.onnx
 
+### Read more
+
+[GitHub Wiki - Pytorch-Workaround](https://github.com/axinc-ai/export-to-onnx/wiki/Pytorch-Workaround)
+
+
 ##	Keras
 A model learned with Keras can be loaded by outputting it to ONNX format using keras2onnx, then using the included script tools/onnx/onnx2prototxt.py to convert it to a "prototxt" file that then can be loaded into AILIA.
 
@@ -70,5 +75,10 @@ Exporting from Tensorflow to ONNX
 Creation of the prototxt file
 
     python3 onnx2prototxt.py vgg16.onnx
+
+### Read more
+
+[GitHub Wiki - Tensorflow-Workaround](https://github.com/axinc-ai/export-to-onnx/wiki/Tensorflow-Workaround)
+
 
 
