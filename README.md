@@ -5,7 +5,7 @@ A model learned with Pytorch can be loaded by outputting it to ONNX format using
 
 Export from Pytorch to ONNX
 
-    torch.onnx.export(vgg16, x, 'vgg16_pytorch.onnx', verbose=True)
+    torch.onnx.export(vgg16, x, 'vgg16_pytorch.onnx', verbose=True, opset_version=10)
 
 Creation of the "prototxt" file
 
