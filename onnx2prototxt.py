@@ -1,10 +1,15 @@
 # ailia onnx to prototxt
-# (c) 2020-2022 AXELL CORPORATION
+# (c) 2020-2026 AXELL CORPORATION
 
 import sys
 import onnx
 import json
 
+
+def delete_metadata_props(elem):
+    if hasattr(elem, "metadata_props"):
+        del elem.metadata_props[:]
+    return elem
 
 def dump_normal(elem, indent, file):
     for s in str(elem).splitlines():
@@ -65,6 +70,7 @@ def onnx2prototxt(onnx_path):
         print("  name: " + json.dumps(model.graph.name), file=f)
 
         for e in model.graph.node:
+            e = delete_metadata_props(e)
             print("  node {", file=f)
             if e.op_type == "Constant":
                 dump_constant(e, "    ", f)
@@ -73,16 +79,19 @@ def onnx2prototxt(onnx_path):
             print("  }", file=f)
 
         for e in model.graph.initializer:
+            e = delete_metadata_props(e)
             print("  initializer {", file=f)
             dump_initializer(e, "    ", f)
             print("  }", file=f)
 
         for e in model.graph.input:
+            e = delete_metadata_props(e)
             print("  input {", file=f)
             dump_normal(e, "    ", f)
             print("  }", file=f)
 
         for e in model.graph.output:
+            e = delete_metadata_props(e)
             print("  output {", file=f)
             dump_normal(e, "    ", f)
             print("  }", file=f)
